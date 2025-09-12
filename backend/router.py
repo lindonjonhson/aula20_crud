@@ -32,14 +32,14 @@ def read_one_product(product_id:int, db: Session = Depends(get_db)):
 # rota de adicionar item
 
 @router.post('/products/', response_model=ProductResponse)
-def create_product(product: ProductCreate, db: Session = Depends(get_db)):
+def create_product_route(product: ProductCreate, db: Session = Depends(get_db)):
     db_product = create_product(product=product, db=db)
     return db_product
 
 # rota de deletar item
 
 @router.delete('/product/{product_id}', response_model=ProductResponse)
-def delete_product(product_id:int, db: Session = Depends(get_db)):
+def delete_product_route(product_id:int, db: Session = Depends(get_db)):
     product_db = delete_product(product_id=product_id, db=db)
     if product_db is None:
         raise HTTPException(status_code=404, detail='Voce procurou um produto que nao existe')
